@@ -2,6 +2,7 @@
 rem Elden Ring: AutoSaver
 rem 0.12
 rem 2023/03/15
+MODE con:cols=60 lines=10
 
 set game_folder="E:\Software\ELDEN.RING.Deluxe.Edition.Steam.Rip-InsaneRamZes\ELDEN RING\Game"
 set process_name=eldenring.exe
@@ -71,7 +72,8 @@ if not %current_file%==%backup_file% copy /Y "%profile_folder%\ER0000.sl2" "%bac
 rem Powershell.exe -ExecutionPolicy Unrestricted -Command "Get-ChildItem -path %backup_folder% | where {$_.Lastwritetime -lt (date).addminutes(-10)} | remove-item -Recurse -Force"
 
 Powershell.exe -ExecutionPolicy Unrestricted -Command "$files = Get-ChildItem -Path %backup_folder% | Sort-Object creationtime -Descending; $count = $files.count - 30; if ($files.Count -igt 30) {$DelFiles = $files | Select-Object -last $count; Remove-Item -Path $DelFiles.fullname}"
-
-rem timeout /t 180
-timeout /t 60
+echo.
+echo Pause before next save starts:
+timeout /t 120
+echo.
 goto Main
